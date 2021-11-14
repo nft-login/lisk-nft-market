@@ -11,7 +11,7 @@ export const registeredNFTTokensSchema = {
             fieldNumber: 1,
             items: {
                 type: "object",
-                required: ["id", "value", "ownerAddress"],
+                required: ["id", "value", "ownerAddress", "minPurchaseMargin", "name"],
                 properties: {
                     id: {
                         dataType: "bytes",
@@ -24,7 +24,15 @@ export const registeredNFTTokensSchema = {
                     ownerAddress: {
                         dataType: "bytes",
                         fieldNumber: 3,
-                    }
+                    },
+                    minPurchaseMargin: {
+                        dataType: "uint32",
+                        fieldNumber: 4,
+                    },
+                    name: {
+                        dataType: "string",
+                        fieldNumber: 5,
+                    },
                 },
             },
         },

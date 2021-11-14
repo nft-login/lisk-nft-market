@@ -8,7 +8,9 @@ import {
     registeredNFTTokensSchema
 } from './schemas';
 
-const createNFTToken = ({ name, ownerAddress, nonce, value }): { id, name, ownerAddress, value } => {
+import { NFTToken } from './nft_token';
+
+const createNFTToken = ({ name, ownerAddress, nonce, value, minPurchaseMargin }): NFTToken => {
     const nonceBuffer = Buffer.alloc(8);
     nonceBuffer.writeBigInt64LE(nonce);
     const seed = Buffer.concat([ownerAddress, nonceBuffer]);
@@ -16,21 +18,22 @@ const createNFTToken = ({ name, ownerAddress, nonce, value }): { id, name, owner
 
     return {
         id,
+        minPurchaseMargin,
         name,
         ownerAddress,
         value,
     };
-}
+};
 
-const getAllNFTTokens = async (stateStore): Promise<[{id, value, ownerAddress}]> => {
+const getAllNFTTokens = async (stateStore): Promise<[NFTToken]> => {
     const registeredTokensBuffer = await stateStore.chain.get(
         CHAIN_STATE_NFT_TOKENS
     );
     if (!registeredTokensBuffer) {
-        return [] as unknown as [{id, value, ownerAddress}];
+        return [] as unknown as [NFTToken];
     }
 
-    const registeredTokens: { registeredNFTTokens: [{id, value, ownerAddress}] } = codec.decode(
+    const registeredTokens: { registeredNFTTokens: [NFTToken] } = codec.decode(
         registeredNFTTokensSchema,
         registeredTokensBuffer
     );

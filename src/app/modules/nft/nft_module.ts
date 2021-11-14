@@ -5,18 +5,19 @@ import {
 import { getAllNFTTokensAsJSON } from './nft';
 
 import {
-    CHAIN_STATE_NFT_TOKENS,
-    registeredNFTTokensSchema
-} from './schemas';
-
-import {
     CreateNFTAsset
 } from './transactions/create_nft_assets';
+import {
+    PurchaseNFTAsset
+} from './transactions/purchase_nft_asset';
+import {
+    TransferNFTAsset
+} from './transactions/transfer_nft_asset';
 
 export class NFTModule extends BaseModule {
-    public name = "nft";
-    public id = 1024;
-    public schema = {
+    name = "nft";
+    id = 1024;
+    schema = {
         type: "object",
         required: ["ownNFTs"],
         properties: {
@@ -33,9 +34,8 @@ export class NFTModule extends BaseModule {
         },
     };
 
-    public transactionAssets: BaseAsset[] = [new CreateNFTAsset()];
-
-    public actions = {
+    transactionAssets: BaseAsset[] = [new CreateNFTAsset(), new PurchaseNFTAsset(), new TransferNFTAsset()];
+    actions = {
         getAllNFTTokens: async () => getAllNFTTokensAsJSON(this._dataAccess),
     };
 };
