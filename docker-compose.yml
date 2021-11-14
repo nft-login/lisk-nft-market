@@ -5,8 +5,7 @@ services:
       context: .
     ports:
       - "4000:4000"
+      - "4004:4004"
+      - "4005:4005"
       - "5000:5000"
       - "8080:8080"
-    environment:
-      - HOST=0.0.0.0
-      - LISK_API_PUBLIC=true
