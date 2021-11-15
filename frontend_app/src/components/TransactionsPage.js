@@ -9,7 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
 import { getAllTransactions } from "../api";
-import { cryptography, Buffer } from '@liskhq/lisk-client';
+import { cryptography } from '@liskhq/lisk-client';
 
 const columns = [
   { id: 'moduleName', label: 'ModuleName', minWidth: 100, maxWidth: 50 },

@@ -38,7 +38,7 @@ const encodedNFTHistorySchema = {
     },
 };
 
-const getDBInstance = async (dataPath = './data', dbName = 'nft_plugin.db') => {
+const getDBInstance = async (dataPath = '~/.lisk/lisk-nft-market/', dbName = 'nft_plugin.db') => {
     const dirPath = path.join(dataPath.replace('~', os.homedir()), 'plugins/data', dbName);
     await fs_extra.ensureDir(dirPath);
     return new db.KVStore(dirPath);
@@ -55,7 +55,7 @@ const getTransactions = async (db) => {
     }
 };
 
-const getAllTransactions = async (db, registeredSchema): Promise<ReadonlyArray<Transaction>> => {
+const getAllTransactions = async (db, registeredSchema): Promise<any> => {
     const savedTransactions = await getTransactions(db);
     const transactions: Transaction[] = [];
     for (const trx of savedTransactions) {

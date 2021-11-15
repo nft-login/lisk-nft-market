@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link as RouterLink } from "react-router-dom";
-import { transactions, cryptography, Buffer } from "@liskhq/lisk-client";
+import { transactions, cryptography } from "@liskhq/lisk-client";
 
 import PurchaseNFTTokenDialog from "./dialogs/PurchaseNFTTokenDialog";
 import TransferNFTDialog from "./dialogs/TransferNFTDialog";
@@ -44,6 +44,7 @@ export default function NFTToken(props) {
   const classes = useStyles();
   const [openPurchase, setOpenPurchase] = useState(false);
   const [openTransfer, setOpenTransfer] = useState(false);
+  Buffer.from(props.item.ownerAddress, 'hex')
   const base32UIAddress = cryptography.getBase32AddressFromAddress(Buffer.from(props.item.ownerAddress, 'hex'), 'lsk').toString('binary');
   return (
     <Card>

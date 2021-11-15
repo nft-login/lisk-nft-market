@@ -17,7 +17,7 @@ import {
 export class NFTModule extends BaseModule {
     name = "nft";
     id = 1024;
-    schema = {
+    accountSchema = {
         type: "object",
         required: ["ownNFTs"],
         properties: {
