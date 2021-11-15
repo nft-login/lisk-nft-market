@@ -44,4 +44,4 @@ config.local.json
 # Build Directory
 dist
 
-accounts.txt
+data/

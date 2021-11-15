@@ -2,10 +2,17 @@ version: '3.3'
 services:
   blockchain:
     build:
-      context: .
+      context: ./blockchain
     ports:
       - "4000:4000"
       - "4004:4004"
       - "4005:4005"
       - "5000:5000"
       - "8080:8080"
+  app:
+    build:
+      context: ./frontend_app
+    ports:
+      - "3000:3000"
+    environment:
+      - CI=true
