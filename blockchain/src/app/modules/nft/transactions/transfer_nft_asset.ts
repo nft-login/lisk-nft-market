@@ -32,7 +32,7 @@ export class TransferNFTAsset extends BaseAsset {
         },
     };
 
-    async apply({ asset, stateStore, reducerHandler, transaction }) {
+    async apply({ asset, stateStore, transaction }) {
         const nftTokens = await getAllNFTTokens(stateStore);
         const nftTokenIndex = nftTokens.findIndex((t) => t.id.equals(asset.nftId));
 

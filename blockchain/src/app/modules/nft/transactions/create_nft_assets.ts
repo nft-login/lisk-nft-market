@@ -17,21 +17,27 @@ export class CreateNFTAsset extends BaseAsset {
     schema = {
         $id: "lisk/nft/create",
         type: "object",
-        required: ["initValue", "name"],
+        required: ["minPurchaseMargin", "initValue", "name"],
         properties: {
+            minPurchaseMargin: {
+                dataType: "uint32",
+                fieldNumber: 1,
+            },
             initValue: {
                 dataType: "uint64",
-                fieldNumber: 1,
+                fieldNumber: 2,
             },
             name: {
                 dataType: "string",
-                fieldNumber: 2,
+                fieldNumber: 3,
             },
         },
     };
     validate({ asset }) {
         if (asset.initValue <= 0) {
             throw new Error("NFT init value is too low.");
+        } else if (asset.minPurchaseMargin < 0 || asset.minPurchaseMargin > 100) {
+            throw new Error("The NFT minimum purchase value needs to be between 0 and 100.");
         }
     };
     async apply({ asset, stateStore, reducerHandler, transaction }) {
@@ -44,7 +50,8 @@ export class CreateNFTAsset extends BaseAsset {
             name: asset.name,
             ownerAddress: senderAddress,
             nonce: transaction.nonce,
-            value: asset.initValue
+            value: asset.initValue,
+            minPurchaseMargin: asset.minPurchaseMargin,
         });
 
         // 6.update sender account with unique nft id

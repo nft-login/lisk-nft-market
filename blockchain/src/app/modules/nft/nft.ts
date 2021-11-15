@@ -25,15 +25,15 @@ const createNFTToken = ({ name, ownerAddress, nonce, value, minPurchaseMargin })
     };
 };
 
-const getAllNFTTokens = async (stateStore): Promise<[NFTToken]> => {
+const getAllNFTTokens = async (stateStore): Promise<NFTToken[]> => {
     const registeredTokensBuffer = await stateStore.chain.get(
         CHAIN_STATE_NFT_TOKENS
     );
     if (!registeredTokensBuffer) {
-        return [] as unknown as [NFTToken];
+        return []  as NFTToken[];
     }
 
-    const registeredTokens: { registeredNFTTokens: [NFTToken] } = codec.decode(
+    const registeredTokens: { registeredNFTTokens: NFTToken[] } = codec.decode(
         registeredNFTTokensSchema,
         registeredTokensBuffer
     );
