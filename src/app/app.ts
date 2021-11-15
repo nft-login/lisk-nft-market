@@ -8,7 +8,7 @@ export const getApplication = (
 ): Application => {
 
 	const appConfig = utils.objects.mergeDeep({}, config, {
-		rpc: { enable: true, mode: "ws", host: "0.0.0.0" },
+		//rpc: { enable: true, mode: "ws", host: "0.0.0.0" },
 		plugins: {
 			httpApi: {
 				host: "0.0.0.0",
