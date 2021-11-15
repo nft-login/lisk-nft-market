@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Container, Typography, Divider, Grid } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import {Buffer, cryptography, transactions} from "@liskhq/lisk-client";
+import {cryptography, transactions} from "@liskhq/lisk-client";
 import NFTToken from "./NFTToken";
 import { fetchNFTToken } from "../api";
 

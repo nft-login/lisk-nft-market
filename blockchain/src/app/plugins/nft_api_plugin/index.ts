@@ -1,5 +1,6 @@
 import * as express from 'express';
 import type { Express } from 'express';
+import fetch from 'node-fetch';
 import { Server } from 'http';
 import * as cors from 'cors';
 import { BasePlugin, BaseChannel, codec, db } from 'lisk-sdk';
@@ -89,6 +90,29 @@ export class NFTAPIPlugin extends BasePlugin {
                 }
             })
             res.json({ data });
+        });
+
+        // proxy for http api
+        this._app.get("/api/node/info", async (_req, res) => {
+            return fetch("http://localhost:4000/api/node/info")
+                .then((_res) => _res.json())
+                .then((_res) => res.json(_res));
+        });
+        this._app.get("/api/accounts/:id", async (req, res) => {
+            return fetch(`http://localhost:4000/api/accounts/${req.params.id}`)
+                .then((_res) => _res.json())
+                .then((_res) => res.json(_res));
+        });
+        this._app.post("/api/transactions", async (req, res) => {
+            return fetch(`http://localhost:4000/api/transactions`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(req.body),
+            })
+                .then((_res) => _res.json())
+                .then((_res) => res.json(_res));
         });
 
         this._subscribeToChannel();

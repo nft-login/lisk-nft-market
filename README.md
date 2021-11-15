@@ -1,37 +1,19 @@
-# Getting Started with Lisk Blockchain Client
+# Lisk nft market
 
 This project was bootstrapped with [Lisk SDK](https://github.com/LiskHQ/lisk-sdk)
 
-### Start a node
+[![Lisk submission](https://img.youtube.com/vi/AIU80ymJ41c/0.jpg)](https://www.youtube.com/watch?v=AIU80ymJ41c)
+
+### Start
 
 ```
-./bin/run start
+docker-compose build
+docker-compose up
 ```
 
-### Add a new module
+Open http://localhost:3000
 
-```
-lisk generate:module ModuleName ModuleID
-// Example
-lisk generate:module token 1
-```
+### Visit marketplace
 
-### Add a new asset
-
-```
-lisk generate:asset ModuleName AssetName AssetID
-// Example
-lisk generate:asset token transfer 1
-```
-
-### Add a new plugin
-
-```
-lisk generate:plugin PluginAlias
-// Example
-lisk generate:plugin httpAPI
-```
-
-## Learn More
-
-You can learn more in the [documentation](https://lisk.io/documentation/lisk-sdk/index.html).
+Open https://nft-login.github.io/nft-login-marketplace/lisk/?account=lsktrqzuehzhmh4senwdwz3bo2rtqenfuujegjveu&contract=http://localhost:8080/ 
+but change your account.
